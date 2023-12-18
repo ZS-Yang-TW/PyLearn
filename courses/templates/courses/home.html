@@ -1,0 +1,40 @@
+{% extends "courses/base.html" %} 
+
+{% block title %} 
+PyLearn | Python 線上學習資源
+{%endblock %} 
+
+{% block content %}
+<h1> PyLearn | 線上 Python 學習資源 </h1>
+<p> PyLearn 是一個線上學習資源，提供 Python 的教學影片、線上練習、以及線上測驗，讓你可以在家就能學習 Python。 </p>
+<h1 class="display-4"> 熱門課程 </h1>
+
+<div class="row">
+    {% for course in courses %}
+        <div class="col">
+            <div class="card mx-auto" style="width: 18rem;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Python.svg/640px-Python.svg.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">{{course}}</h5>
+                  <p class="card-text">{{course.description}}</p>
+                </div>
+
+                <div class="card-footer">
+                    <div>
+                        <div class="row no-gutters">
+                            <div class="col">
+                                <a href="#" class="btn btn-light btn-block">現在報名</a>
+                            </div>
+                            <div class="col">
+                                <a href="#" class="btn btn-light btn-block">更多資訊</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock%}
