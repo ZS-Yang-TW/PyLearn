@@ -3,8 +3,9 @@ from django.db import models
 # 課程資料
 class Course(models.Model):
     name = models.CharField(max_length = 30, null = False)
+    slug = models.CharField(max_length = 30, null = False, unique = True)
     description = models.CharField(max_length = 200, null = True)
-    price = models.IntegerField(null = False)
+    price = models.IntegerField(null = False)   
     discount = models.IntegerField(default = 0, null = False)
     active = models.BooleanField(default = False)
     thumbnail = models.ImageField(upload_to = "files/thumbnail")
