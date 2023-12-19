@@ -1,0 +1,27 @@
+{% extends "courses/base.html" %} 
+{% load course_custom_tags %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'courses/css/common.css' %}">
+<link rel="stylesheet" href="{% static 'courses/css/scrollbar.css' %}">
+{% endblock  %}
+
+{% block title %} 
+PyLearn | Python 線上學習資源
+{% endblock %} 
+
+{% block content %}
+<div>
+    <h1 class="display-3">註冊頁面</h1>
+
+    <div>
+        <form action="/signup" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <input type="submit" value="註冊">
+        </form>
+    </div>
+</div>
+{% endblock  %}
