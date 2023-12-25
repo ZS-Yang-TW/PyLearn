@@ -52,10 +52,20 @@ def course_page(request, slug):
     if (request.user.is_authenticated) and (video.is_preview == False):
         return redirect("/login")
     
-    content = {
+    context = {
         "course": course,
         "video": video,
         "videos": videos
     }
     
-    return render(request, "courses/course_page.html", content)
+    return render(request, "courses/course_page.html", context)
+
+def check_out(request, slug):
+    course = Course.objects.get(slug = slug)
+    if not request.user.is_authenticated:
+        return redirect("/login")
+    context = {
+        "course": course
+    }
+    
+    return render(request, "courses/check-out.html", context)

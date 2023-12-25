@@ -4,7 +4,7 @@ from django.shortcuts import HttpResponse
 from django.conf.urls.static import static
 from django.conf import settings
 
-from .views import home,  course_page, signout
+from .views import home,  course_page, signout, check_out
 from .views import SignupView, LoginView
 urlpatterns = [
     path("", home, name = "Home Page"),
@@ -12,6 +12,7 @@ urlpatterns = [
     path("login", LoginView.as_view(), name = "Login Page"),
     path("logout", signout, name = "Logout Page"),
     path('courses/<str:slug>', course_page, name = "Course Page"),
+    path('check-out/<str:slug>', check_out, name = "Course Page"),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

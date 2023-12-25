@@ -1,0 +1,46 @@
+{% extends "courses/base.html" %} 
+{% load course_custom_tags %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'courses/css/common.css' %}">
+<link rel="stylesheet" href="{% static 'courses/css/scrollbar.css' %}">
+{% endblock  %}
+
+{% block title %} 
+PyLearn | Python 線上學習資源
+{%endblock %} 
+
+{% block content %}
+<div>
+    <h1 class="display-4 alert text-center">結帳頁面</h1>
+    <div class="row">
+        <div class="col">
+            <div class="card mx-auto" style="width: 18rem;">
+                <img src="{{ course.thumbnail.url }}" class="card-img-top" alt="{{ course.name }}">
+                <div class="card-body">
+                <h5 class="card-title">{{ course.name }}</h5>
+                <p class="card-text">
+                    <span class="price">
+                        <del>{{ course.price | ntd }}</del>
+                        &nbsp;{% cal_sellprice course.price course.discount as value %} {{ value | ntd }}
+
+                    </span>
+                    <br>
+                    <span class="discount">現在買可省 {{ course.discount }}%</span>
+                </p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <h3>結帳資訊</h3>
+        </div>
+    </div>
+    <div>
+        <form action="/login" method="POST">
+            {% csrf_token %}
+            <input type="submit" value="結帳">
+        </form>
+    </div>
+</div>
+{% endblock  %}
