@@ -1,0 +1,43 @@
+name: pylearn_ci
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 4
+      matrix:
+        python-version: [3.7, 3.8, 3.9]
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+    
+    # 安裝 Poetry
+    - name: Install Poetry
+      run: |
+        curl -sSL https://install.python-poetry.org | python3 -
+
+    # 配置 Poetry: 不建立虛擬環境，因為 GitHub Actions 已經在每個工作流程步驟中運行於一個乾淨的環境中
+    - name: Configure Poetry
+      run: |
+        poetry config virtualenvs.create false
+
+    # 安裝依賴項
+    - name: Install Dependencies
+      run: |
+        poetry install
+
+    # 執行測試
+    - name: Run Tests
+      run: |
+        poetry run python manage.py test
